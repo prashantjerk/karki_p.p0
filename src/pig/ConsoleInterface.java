@@ -17,7 +17,7 @@ public class ConsoleInterface implements PigUI {
     // asks user for the seed and returns it
     @Override
     public int askUserForSeed() {
-        out.println("What seed would you like?\n");
+        out.println("What seed would you like? ");
         return scanner.nextInt();
     }
 
@@ -38,13 +38,13 @@ public class ConsoleInterface implements PigUI {
     // displays whose turn it is
     @Override
     public void displayPlayersTurn(int playerNumber) {
-        out.format("It is player %d's turn.", playerNumber);
+        out.format("It is player %d's turn.\n", playerNumber);
     }
 
     // displays what number appeared on rolling
     @Override
     public void displayRollResult(int diceRoll) {
-        out.println("Roll" + diceRoll);
+        out.println("Roll: " + diceRoll);
     }
 
     // displays turn score and the new score

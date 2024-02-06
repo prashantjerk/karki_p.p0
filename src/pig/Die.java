@@ -34,6 +34,7 @@ public class Die {
     // description: returns the result of rolling the dice
     public int nextRoll()
     {
-        return sides[rand.nextInt(diceSides)];
+        return sides[rand.nextInt(diceSides)];  // get number between 1 and 6
+                                                // return the value on that index array 'sides'
     }
 }
