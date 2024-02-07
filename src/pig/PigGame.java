@@ -8,8 +8,8 @@ public class PigGame {
     private final PigPlayer player2;
     private final PigUI gameUI;
     private final Die die;
-    private int playerNumber = 1;
-    private int player1Score, player2Score, tempScore;
+    private int playerNumber;
+    private int player1Score, player2Score, tempScore, rollResult;
     public PigGame(PigPlayer player1, PigPlayer player2, int seed, PigUI ui) {
         this.player1 = player1;
         this.player2 = player2;
@@ -21,22 +21,24 @@ public class PigGame {
         gameUI.displayCurrentScores(player1Score, player2Score);
         gameUI.displayPlayersTurn(playerNumber);
 
-        int rollResult = die.nextRoll();  // this generates random roll
-        tempScore += rollResult;
-        gameUI.displayRollResult(rollResult); // this displays the rollResult
 
         // run until one of the player scores 100
         while(player1Score < GOAL_SCORE || player2Score < GOAL_SCORE) {
-            while(player1.isRolling(player1Score, player2Score, tempScore)) {
+            playerNumber = 1;
+            gameUI.displayPlayersTurn(playerNumber);
+
+             do {
                 rollResult = die.nextRoll();
+                gameUI.displayRollResult(rollResult);
                 if(rollResult == 1) {
                     tempScore = 0;
-                    gameUI.displayTurnResults(playerNumber, tempScore, player1Score);
+                } else if (player1Score >= GOAL_SCORE) {
+                    gameUI.displayGameOver(player1Score, player2Score);
                 } else {
                     tempScore += rollResult;
                 }
-                gameUI.displayRollResult(rollResult);
-            }
+            } while(rollResult != 1 && player1.isRolling(player1Score, player2Score, tempScore));
+
             playerNumber = 2;   // change the player
             player1Score += tempScore;
             gameUI.displayTurnResults(playerNumber, tempScore, player1Score);
@@ -45,23 +47,23 @@ public class PigGame {
             gameUI.displayPlayersTurn(playerNumber);
 
             tempScore = 0;  // set the temp score back to 0
-            while(player2.isRolling(player2Score, player1Score, tempScore)){
-            rollResult = die.nextRoll();
-            if(rollResult == 1) {
-                tempScore = 0;
-                gameUI.displayTurnResults(playerNumber, tempScore, player2Score);
-            } else {
+
+            do {
+                rollResult = die.nextRoll();
                 gameUI.displayRollResult(rollResult);
-            }
-            }
+                if(rollResult == 1) {
+                    tempScore = 0;
+                } else if (player2Score >= GOAL_SCORE) {
+                    gameUI.displayGameOver(player1Score, player2Score);
+                } else {
+                    tempScore += rollResult;
+                }
+            } while(player2.isRolling(player2Score, player1Score, tempScore) && rollResult != 1);
+
+                player2Score += tempScore;
+                gameUI.displayTurnResults(playerNumber, tempScore, player2Score);
+                gameUI.displayCurrentScores(player1Score, player2Score);
+                tempScore = 0;
         }
-        /*
-Before each turn, it should update the UI to display the current scores.
-During each turn, it should update the UI to display the die rolls.
-After each turn, it should update the UI to display the turn results.
-At the end of the game, it should update the UI to display game over.
-         */
-
-
     }
 }
