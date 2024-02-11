@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);     // instance to take input
         ConsoleInterface instConsoleInterface = new ConsoleInterface(input, System.out);    // instantiate ConsoleInterface
         PigPlayer player1 = new ConsolePigPlayer(input, System.out);    // instantiate player1 as ConsolePigPlayer
         PigPlayer player2 = new HoldAtXPigPlayer(20);    // instantiate player2 as HoldAtXPigPlayer

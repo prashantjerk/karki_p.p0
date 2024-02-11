@@ -3,13 +3,15 @@ package pig;
 
 public class HoldAtXPigPlayer implements  PigPlayer{
     private final int numberHeldAt;
+    // Creates a "hold at x or goal" AI pig player with the given x.
     public HoldAtXPigPlayer(int x)
     {
         numberHeldAt = x;
     }
 
+    // Creates a "hold at x or goal" AI pig player with the given x
     @Override
     public boolean isRolling(int myScore, int otherScore, int turnTotal) {
-        return (turnTotal < this.numberHeldAt && myScore < 100 && otherScore < 100);
+        return (myScore < 100 && otherScore < 100 && turnTotal < this.numberHeldAt);
     }
 }

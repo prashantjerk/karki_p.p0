@@ -10,8 +10,10 @@ public class MS1Main {
         Scanner input = new Scanner(System.in);
         PigUI consoleInterface = new ConsoleInterface(input, out);
 
+        // create a new Die according to the seed given by the user
         Die die = new Die(consoleInterface.askUserForSeed());
 
+        // Print random 6 rolls of a die to the console.
         for(int i = 0; i < 10; i++) out.println(die.nextRoll());
     }
 }

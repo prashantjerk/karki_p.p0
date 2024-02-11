@@ -14,40 +14,39 @@ public class ConsoleInterface implements PigUI {
         this.out = out;
     }
 
-    // asks user for the seed and returns it
+    // This method ask's the user for a seed for the game
     @Override
     public int askUserForSeed() {
         out.println("What seed would you like? ");
         return scanner.nextInt();
     }
 
-    // displays the score of player 1 and 2
+    // Prints the player's scores to the console.
     @Override
     public void displayCurrentScores(int player1Score, int player2Score) {
         out.println("Player 1 score: " + player1Score);
         out.println("Player 2 score: " + player2Score);
     }
 
-    // displays "Game Over"
+    // Prints "Game Over!!!" to the console.
     @Override
     public void displayGameOver(int player1Score, int player2Score) {
         out.println("Game Over!!!");
-        displayCurrentScores(player1Score, player2Score);
     }
 
-    // displays whose turn it is
+    // Prints whose turn it is to console.
     @Override
     public void displayPlayersTurn(int playerNumber) {
         out.format("It is player %d's turn.\n", playerNumber);
     }
 
-    // displays what number appeared on rolling
+    // Prints "Roll: " and then the dice roll
     @Override
     public void displayRollResult(int diceRoll) {
         out.println("Roll: " + diceRoll);
     }
 
-    // displays turn score and the new score
+    // Prints the turn results to the console.
     @Override
     public void displayTurnResults(int playerNumber, int turnTotal, int newScore) {
         out.println("Turn Total: " + turnTotal);
